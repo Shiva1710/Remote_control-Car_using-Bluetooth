@@ -1,0 +1,54 @@
+char t;
+ 
+void setup() {
+pinMode(39,OUTPUT);   //left motors  forward
+pinMode(40,OUTPUT);   //left motors reverse
+pinMode(41,OUTPUT);   //right  motors forward
+pinMode(42,OUTPUT);   //right motors reverse
+Serial.begin(9600);
+ 
+}
+ 
+void loop() {
+if(Serial.available()>0){
+  t = Serial.read();
+  Serial.println(t);
+}
+ 
+if(t == 'F'){            //move  forward
+  digitalWrite(39,HIGH);
+  digitalWrite(40,LOW);
+  digitalWrite(41,HIGH);
+  digitalWrite(42,LOW);
+}
+ 
+else if(t == 'B'){      //move reverse 
+  digitalWrite(39,LOW);
+  digitalWrite(40,HIGH);
+  digitalWrite(41,LOW);
+  digitalWrite(42,HIGH);
+}
+  
+else if(t == 'L'){      //turn right 
+  digitalWrite(39,LOW);
+  digitalWrite(40,LOW);
+  digitalWrite(41,HIGH);
+  digitalWrite(42,LOW);
+}
+ 
+else  if(t == 'R'){      //turn left 
+  digitalWrite(39,HIGH);
+  digitalWrite(40,LOW);
+  digitalWrite(41,LOW);
+  digitalWrite(42,LOW);
+}
+
+
+else if(t == 'S'){      //STOP 
+  digitalWrite(39,LOW);
+  digitalWrite(40,LOW);
+  digitalWrite(41,LOW);
+  digitalWrite(42,LOW);
+}
+delay(100);
+}
